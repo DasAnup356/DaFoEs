@@ -47,6 +47,39 @@ conda activate dafoes
 pip3 install -r requirements.txt
 ```
 
+## Get the dataset
+
+The datasets used in the paper are not shipped with this repository.
+
+This code expects the following folders to exist at the repository root:
+
+- `visu_depth_haptic_data/` (DaFoEs dataset)
+- `experiment_data/` (dVRK dataset referenced in the paper)
+
+### Option A: Extract a local archive
+
+If you already have an archive (e.g. `dafoes.zip` or `dafoes.tar.gz`):
+
+```shell
+python3 scripts/get_dataset.py --dataset dafoes --archive /path/to/dafoes.zip
+python3 scripts/get_dataset.py --dataset dvrk --archive /path/to/dvrk.zip
+```
+
+### Option B: Download from a URL
+
+If you have a direct HTTP(S) download link to the dataset archive:
+
+```shell
+python3 scripts/get_dataset.py --dataset dafoes --url "https://.../dafoes.zip"
+```
+
+By default archives are cached under `.cache/datasets/` and extracted into the expected folder.
+
+### Notes
+
+- If your archive already contains a top-level folder like `visu_depth_haptic_data/`, you may want to extract to the repo root instead by passing `--output .`.
+- To re-download/re-extract from scratch, add `--force`.
+
 ## Training
 
 The scripts are adapted for the use on our two available dataset, however it can be adapted to any custom dataset of your preference. The [*train.py*](train.py) file contains an example for a simple training loop on how to train the force estimation model.
@@ -102,4 +135,3 @@ If you find this code or this research useful, please consider citing our work:
 
 <a id="1">[1]</a>
 Chua, Z., Jarc, A. M., & Okamura, A. M. (2021, May). Toward force estimation in robot-assisted surgery using deep learning with vision and robot state. In 2021 IEEE International Conference on Robotics and Automation (ICRA) (pp. 12335-12341). IEEE.
-
